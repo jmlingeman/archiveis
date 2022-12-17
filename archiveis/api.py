@@ -29,7 +29,6 @@ def capture(
     # Configure the request headers
     headers = {
         "User-Agent": user_agent,
-        "host": urllib.parse.urlparse(domain).netloc,
     }
 
     # print(f"UA: {user_agent}")
