@@ -22,10 +22,9 @@ def capture(
     """
     # The site changes its TLD all the time. Cache what we get currently.
     archiveis_url = os.environ.get("ARCHIVEIS_URL", "https://archive.md")
-    domain = requests.get(archiveis_url).url
 
     # Put together the URL that will save our request
-    save_url = domain + "submit/"
+    save_url = archiveis_url + "/submit/"
 
     # Configure the request headers
     headers = {
@@ -74,7 +73,7 @@ def capture(
         post_kwargs["proxies"] = proxies
 
     logger.debug(f"Requesting {save_url}")
-    response = requests.post(save_url, **post_kwargs)
+    response = requests.get(save_url + "?" + target_url, **post_kwargs)
     print(response.headers)
     print(response.text)
     response.raise_for_status()
