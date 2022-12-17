@@ -50,6 +50,7 @@ def capture(
 
     # It will need to be parsed from the homepage response headers
     html = str(response.content)
+    print(html)
     try:
         unique_id = (
             html.split('name="submitid', 1)[1].split('value="', 1)[1].split('"', 1)[0]
@@ -76,6 +77,8 @@ def capture(
 
     logger.debug(f"Requesting {save_url}")
     response = requests.post(save_url, **post_kwargs)
+    print(response.headers)
+    print(response.text)
     response.raise_for_status()
 
     # There are a couple ways the header can come back
