@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 def capture(
     target_url,
-    user_agent="archiveis (https://github.com/pastpages/archiveis)",
+    user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0",
     proxies={},
 ):
     """
