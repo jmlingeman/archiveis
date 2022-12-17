@@ -4,6 +4,7 @@ import urllib.parse
 
 import click
 import requests
+import os
 
 logger = logging.getLogger(__name__)
 
@@ -19,7 +20,8 @@ def capture(
     Returns the URL where the capture is stored.
     """
     # The site changes its TLD all the time. Cache what we get currently.
-    domain = requests.get("https://archive.is").url
+    archiveis_url = os.environ.get("ARCHIVEIS_URL", "https://archive.today")
+    domain = requests.get(archiveis_url).url
 
     # Put together the URL that will save our request
     save_url = domain + "submit/"
