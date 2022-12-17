@@ -33,42 +33,40 @@ def capture(
         "host": urllib.parse.urlparse(domain).netloc,
     }
 
-    print(f"UA: {user_agent}")
-    # Request a unique identifier for our activity
-    logger.debug(f"Requesting {domain}")
-    get_kwargs = dict(
-        timeout=120,
-        allow_redirects=True,
-        headers=headers,
-    )
-    if proxies:
-        get_kwargs["proxies"] = proxies
-    response = requests.get(domain, **get_kwargs)
-    print(response.headers)
-    print(response.text)
-    response.raise_for_status()
+    # print(f"UA: {user_agent}")
+    # # Request a unique identifier for our activity
+    # logger.debug(f"Requesting {domain}")
+    # get_kwargs = dict(
+    #     timeout=120,
+    #     allow_redirects=True,
+    #     headers=headers,
+    # )
+    # if proxies:
+    #     get_kwargs["proxies"] = proxies
+    # response = requests.get(domain, **get_kwargs)
+    # print(response.headers)
+    # print(response.text)
+    # response.raise_for_status()
 
-    # It will need to be parsed from the homepage response headers
-    html = str(response.content)
-    print(html)
-    try:
-        unique_id = (
-            html.split('name="submitid', 1)[1].split('value="', 1)[1].split('"', 1)[0]
-        )
-        logger.debug(f"Unique identifier: {unique_id}")
-    except IndexError:
-        logger.warning(
-            "Unable to extract unique identifier from archive.is. Submitting without it."
-        )
-        unique_id = None
+    # # It will need to be parsed from the homepage response headers
+    # html = str(response.content)
+    # print(html)
+    # try:
+    #     unique_id = (
+    #         html.split('name="submitid', 1)[1].split('value="', 1)[1].split('"', 1)[0]
+    #     )
+    #     logger.debug(f"Unique identifier: {unique_id}")
+    # except IndexError:
+    #     logger.warning(
+    #         "Unable to extract unique identifier from archive.is. Submitting without it."
+    #     )
+    #     unique_id = None
 
     # Send the capture request to archive.is with the unique id included
     data = {
         "url": target_url,
         "anyway": 1,
     }
-    if unique_id:
-        data.update({"submitid": unique_id})
 
     time.sleep(2)
     post_kwargs = dict(timeout=120, allow_redirects=True, headers=headers, data=data)
