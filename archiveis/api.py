@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import logging
 import urllib.parse
+import time
 
 import click
 import requests
@@ -66,6 +67,7 @@ def capture(
     if unique_id:
         data.update({"submitid": unique_id})
 
+    time.sleep(2)
     post_kwargs = dict(timeout=120, allow_redirects=True, headers=headers, data=data)
     if proxies:
         post_kwargs["proxies"] = proxies
