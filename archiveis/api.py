@@ -32,6 +32,7 @@ def capture(
         "host": urllib.parse.urlparse(domain).netloc,
     }
 
+    print(f"UA: {user_agent}")
     # Request a unique identifier for our activity
     logger.debug(f"Requesting {domain}")
     get_kwargs = dict(
