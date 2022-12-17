@@ -20,7 +20,7 @@ def capture(
     Returns the URL where the capture is stored.
     """
     # The site changes its TLD all the time. Cache what we get currently.
-    archiveis_url = os.environ.get("ARCHIVEIS_URL", "https://archive.today")
+    archiveis_url = os.environ.get("ARCHIVEIS_URL", "https://archive.md")
     domain = requests.get(archiveis_url).url
 
     # Put together the URL that will save our request
